@@ -1,40 +1,55 @@
+#include "holberton.h"
 #include <stdio.h>
 #include <stdlib.h>
 
 /**
- * main - prints minimum number of coins to make change for an amount of money.
- * @argc: number of arguments passed to the function
- * @argv: argument vector of pointers to strings
- *
- * Return: 0 if no errors, else 1
+ * returnCents - calculates the min number of coins needed to make change given
+ * @n: target change value
+ * Return: min num of coins
  */
-int main(int argc, char *argv[])
+int returnCents(int n)
 {
-int a, n = 0, i, t;
-int c[5] = {25, 10, 5, 2, 1};
+int coins = 0;
+
+while (n)
+{
+if (n >= 25)
+n -= 25;
+else if (n >= 10)
+n -= 10;
+else if (n >= 5)
+n -= 5;
+else if (n >= 2)
+n -= 2;
+else if (n >= 1)
+n -= 1;
+coins++;
+}
+return (coins);
+}
+
+/**
+ * main - prints the minimum number of coins to
+ * make change for an amount of money
+ * @argc: argument count
+ * @argv: argument vector
+ * Return: 0 if no errors
+ */
+int main(int argc, char **argv)
+{
+int number;
 
 if (argc != 2)
 {
-puts("Error");
+printf("Error\n");
 return (1);
 }
-a = atoi(argv[1]);
-if (a <= 0)
+number = atoi(argv[1]);
+if (number < 0)
 {
-puts("0");
-return (1);
+printf("0\n");
+return (0);
 }
-else
-{
-for (i = 0; i < 5; i++)
-{
-t = a / c[i];
-a -= t * c[i];
-n += t;
-if (a == 0)
-break;
-}
-}
-printf("%d\n", n);
+printf("%i\n", returnCents(number));
 return (0);
 }
